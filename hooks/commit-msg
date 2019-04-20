@@ -1,0 +1,11 @@
+#!/bin/sh
+PATTERN="BLIS [0-9][0-9]*[ -_]/w/w*"
+MASTER_BRANCH="master"
+CURRENT_BRANCH='git rev-parse --abbrev-ref HEAD'
+echo $CURRENT_BRANCH
+if [$CURRENT_BRANCH=$MASTER_BRANCH]; then
+	if test="" "grep $PATTERN $1"; then
+		exit 1
+	fi
+fi
+exit 1
