@@ -1,11 +1,14 @@
 #!/bin/sh
 PATTERN="BLIS [0-9][0-9]*[ -_]/w/w*"
-MASTER_BRANCH="master"
-CURRENT_BRANCH='git rev-parse --abbrev-ref HEAD'
-echo $CURRENT_BRANCH
-if [$CURRENT_BRANCH=$MASTER_BRANCH]; then
-	if test="" "grep $PATTERN $1"; then
+master_branch="master"
+develop_branch="develop"
+current_branch="$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)"
+if [ "$current_branch" = "$develop_branch" ]; then
+	if test "" = "$(grep "$PATTERN" "$1")"; then
+		echo "error"
 		exit 1
 	fi
+		echo "all good"
 fi
+		echo "all good2"
 exit 1
